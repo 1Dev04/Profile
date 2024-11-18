@@ -2,7 +2,7 @@
   <img src="https://media.giphy.com/media/ES9cAJlcxblRESzOH1/giphy.gif" width="100"/>
 </div>
 
-<h1 align="center">1Dev04 Profile</h1>
+<h1 align="center">Profile</h1>
 
 <div id="badges" align="center">
   <a href="https://www.linkedin.com/in/krittiphon-yoonaitham-a291482b1/?originalSubdomain=th">
@@ -38,7 +38,7 @@
 
 ## :woman_technologist: About Me : 
 ### I am a Web Developer , Full Stack Developer <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> from Thailand.
-My name is Krittiphon Yoonaitham. l'm 20 years old. I'm from Bang pa han Ayutthaya. I'm currently pursuing the third years of Bachelor's degree in Computer Science at Kasetsart University Sriracha Campus. I have a passion for Coding Programming because it's fun. I am actively seeking a challenging internship opportunity in fields of Front-end , Back-end , Solfware Engineering and Wed Developer to acquire practical experience and propel my future career in these domains.
+Currently pursuing a Bachelor of Computer Science at Kasetsart University, Sriracha Campus. Seeking a challenging internship or cooperative education opportunity from May to October 2025 (6 months, negotiable) as a Software Engineer or Developer. Passionate about coding, open source contributions, and end-to-end project development. Aiming to gain real-world experience and build a strong foundation for future careers in these fields.
 
 ---
 ### :hammer_and_wrench: Languages and Tools :

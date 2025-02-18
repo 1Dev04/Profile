@@ -38,7 +38,8 @@
 
 ## :woman_technologist: About Me : 
 ### I am a Web Developer , Full Stack Developer <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> from Thailand.
-Currently pursuing a Bachelor of Computer Science at Kasetsart University, Sriracha Campus. Seeking a challenging internship or cooperative education opportunity from May to October 2025 (6 months, negotiable) as a Software Engineer or Developer. Passionate about coding, open source contributions, and end-to-end project development. Aiming to gain real-world experience and build a strong foundation for future careers in these fields.
+Currently pursuing a Bachelor of Computer Science at Kasetsart University, Sriracha Campus. 
+Passionate about coding, open source contributions, and end-to-end project development. Aiming to gain real-world experience and build a strong foundation for future careers in these fields.
 
 ---
 ### :hammer_and_wrench: Languages and Tools :

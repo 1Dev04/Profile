@@ -47,7 +47,6 @@ I am passionate about building efficient, scalable systems and continuously impr
 
 Open to Full Stack Developer opportunities (New Grad 2026).
 
-<img src="" title="" width="40"/>&nbsp;
 ---
 ### :hammer_and_wrench: Tech Stack :
 

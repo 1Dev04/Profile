@@ -47,6 +47,22 @@ I am passionate about building efficient, scalable systems and continuously impr
 
 Open to Full Stack Developer opportunities (New Grad 2026).
 
+### Architecture (ABCat Shop)
+Frontend (Flutter)
+-> Backend (Python) + API (FastAPI)
+-> Database (PostgreSQL)
+--
+### API Example
+POST /login
+-> validate user
+-> query database
+-> return JWT token
+--
+### .env.example
+DATABASE_URL= <br/>
+API_KEY= <br/>
+SECRET_KEY= <br/>
+
 ---
 ### :hammer_and_wrench: Tech Stack :
 

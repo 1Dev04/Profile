@@ -21,8 +21,6 @@
 </div>
 </div>
 
-
-
 <h2>
   Hey there
   <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="30px"/>
@@ -49,21 +47,126 @@ Open to Full Stack Developer opportunities (New Grad 2026).
 
 ---
 
-### Architecture (ABCat Shop)
-Frontend (Flutter)
--> Backend (Python) + API (FastAPI)
--> Database (PostgreSQL)
---
-### API Example
+# 🛍️ ABCat Shop – AI-Powered Full Stack E-commerce
+
+> Full-stack mobile eCommerce platform with AI-based analysis and production-ready deployment.
+
+---
+
+## 🏗️ System Architecture
+
+mermaid
+flowchart LR
+    
+    A[Flutter Mobile App] -->|HTTPS REST API| B[FastAPI Backend]
+    B --> C[PostgreSQL Database]
+    B --> D[AI Processing Layer]
+    B --> E[Auth Service (JWT)]
+
+flowchart TD
+    
+    U[User Mobile App] --> N[CDN]
+    N --> S[Backend Server (Ubuntu)]
+    S --> C[Podman Container]
+    C --> API[FastAPI Service]
+    API --> DB[(PostgreSQL)]
+
+sequenceDiagram
+    participant User
+    participant App
+    participant API
+    participant DB
+
+    User->>App: Login Request
+    App->>API: POST /login
+    API->>DB: Query user
+    DB-->>API: Return data
+    API-->>App: JWT Token
+    App-->>User: Authenticated
+
+## 🔗 API Example
 POST /login
--> validate user
--> query database
--> return JWT token
---
+
+    {
+      "email": "user@example.com",
+      "password": "password123"
+    }
+
+Flow:
+Validate input
+Query database
+Generate JWT Token
+
+    {  
+      "access_token": "jwt_token_here",
+      "token_type": "bearer"
+    }
+
+## 🧠 Tech Decisions
+
+### 📱 Frontend
+- Built a mobile application using **Flutter (Dart)**  
+- Chosen for cross-platform development, enabling a single codebase for Android/iOS  
+- Provides smooth UI performance and rapid development workflow  
+
+---
+
+### ⚙️ Backend
+- Developed backend using **Python + FastAPI**  
+- Chosen for:
+  - High performance and async support  
+  - Built-in API documentation (Swagger)  
+  - Easy integration with AI/ML logic (Prompt-based processing, detection, analysis)  
+- Handles business logic, data processing, and communication with database  
+
+---
+
+### 🗄️ Database
+- Used **PostgreSQL**  
+- Chosen for:
+  - Strong relational structure and data consistency  
+  - Scalable design for eCommerce data (users, orders, products)  
+  - Efficient querying and future scalability  
+
+---
+
+### 🔗 API Design
+- Designed **RESTful APIs** using FastAPI  
+- Structured endpoints for clear frontend-backend communication  
+- Ensures maintainability and scalability of the system  
+
+---
+
+### 🚀 Deployment
+- Containerized application using **Podman (rootless containers)**  
+- Chosen for:
+  - Enhanced security (no root privileges required)  
+  - Lightweight and efficient resource usage  
+  - Easy integration with Ubuntu server environment  
+- Supports scalable deployment and load balancing  
+
+---
+
+### 🔄 CI/CD Pipeline
+- Implemented CI/CD using **Jenkins**  
+- Automated build and deployment pipeline  
+- Ensures backend service stays active and reduces downtime (prevents sleep state issues)  
+
+---
+
+### ⚡ Performance Optimization
+- Optimized API response time for faster backend processing  
+- Integrated CDN for faster delivery of static assets  
+- Improved overall application responsiveness and user experience  
+
+---
 ### .env.example
-DATABASE_URL= <br/>
-API_KEY= <br/>
-SECRET_KEY= <br/>
+    DATABASE_URL=
+    API_KEY=
+    SECRET_KEY=
+
+### Planning Stucture
+![Planning Structure](https://res.cloudinary.com/dag73dhpl/image/upload/v1774935454/%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%9E%E0%B8%B1%E0%B8%92%E0%B8%99%E0%B8%B2_lfc7xo.png)
 
 ---
 ### :hammer_and_wrench: Tech Stack :

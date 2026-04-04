@@ -165,8 +165,12 @@ Generate JWT Token
     API_KEY=
     SECRET_KEY=
 
+---
+### Impact
+
+
 ### Planning Stucture
-![Planning Structure](https://res.cloudinary.com/dag73dhpl/image/upload/v1774935454/%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%9E%E0%B8%B1%E0%B8%92%E0%B8%99%E0%B8%B2_lfc7xo.png)
+![Planning Structure](https://res.cloudinary.com/dag73dhpl/image/upload/v1775318744/%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%9E%E0%B8%B1%E0%B8%92%E0%B8%99%E0%B8%B2_2_f0wk5t.png)
 
 ---
 ### :hammer_and_wrench: Tech Stack :

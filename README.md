@@ -251,13 +251,6 @@ The `Jenkinsfile` at the project root automates:
 
 ---
 
-## License
-
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
-
----
-
-*Built with ❤️ using Flutter + FastAPI*
 
 ### Planning Stucture
 ![Planning Structure](https://res.cloudinary.com/dag73dhpl/image/upload/v1775318744/%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%9E%E0%B8%B1%E0%B8%92%E0%B8%99%E0%B8%B2_2_f0wk5t.png)

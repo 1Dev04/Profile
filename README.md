@@ -47,274 +47,217 @@ Open to Full Stack Developer opportunities (New Grad 2026).
 
 ---
 
-# 🛍️ ABCat Shop – AI-Powered Full Stack E-commerce
+# 🛍️ ABCat Shop
 
 > Full-stack mobile eCommerce platform with AI-based analysis and production-ready deployment.
 
----
-
-## 🏗️ System Architecture
-
-mermaid
-flowchart LR
-    
-    A[Flutter Mobile App] -->|HTTPS REST API| B[FastAPI Backend]
-    B --> C[PostgreSQL Database]
-    B --> D[AI Processing Layer]
-    B --> E[Auth Service (JWT)]
-
-flowchart TD
-    
-    U[User Mobile App] --> N[CDN]
-    N --> S[Backend Server (Ubuntu)]
-    S --> C[Podman Container]
-    C --> API[FastAPI Service]
-    API --> DB[(PostgreSQL)]
-
-sequenceDiagram
-    participant User
-    participant App
-    participant API
-    participant DB
-
-    User->>App: Login Request
-    App->>API: POST /login
-    API->>DB: Query user
-    DB-->>API: Return data
-    API-->>App: JWT Token
-    App-->>User: Authenticated
-
-## 🔗 API Example
-POST /login
-
-    {
-      "email": "user@example.com",
-      "password": "password123@"
-    }
-
-Flow:
-Validate input
-Query database
-Generate JWT Token
-
-    {  
-      "access_token": "jwt_token_here",
-      "token_type": "bearer"
-    }
-
-## 🧠 Tech Decisions
-
-### 📱 Frontend
-- Built a mobile application using **Flutter (Dart)**  
-- Chosen for cross-platform development, enabling a single codebase for Android/iOS  
-- Provides smooth UI performance and rapid development workflow  
+![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat&logo=flutter&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat&logo=postgresql&logoColor=white)
+![Podman](https://img.shields.io/badge/Podman-892CA0?style=flat&logo=podman&logoColor=white)
+![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=flat&logo=jenkins&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ---
 
-### ⚙️ Backend
-- Developed backend using **Python + FastAPI**  
-- Chosen for:
-  - High performance and async support  
-  - Built-in API documentation (Swagger)  
-  - Easy integration with AI/ML logic (Prompt-based processing, detection, analysis)  
-- Handles business logic, data processing, and communication with database  
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [API Reference](#api-reference)
+- [Deployment](#deployment)
+- [Performance](#performance)
+- [Contributing](#contributing)
 
 ---
 
-### 🗄️ Database
-- Used **PostgreSQL**  
-- Chosen for:
-  - Strong relational structure and data consistency  
-  - Scalable design for eCommerce data (users, orders, products)  
-  - Efficient querying and future scalability  
+## Overview
+
+ABCat Shop is a full-stack mobile eCommerce platform featuring:
+
+- **Flutter** cross-platform mobile app (Android/iOS)
+- **FastAPI** backend with async support and Swagger docs
+- **AI processing layer** for product analysis
+- **JWT authentication** and secure REST API
+- **Containerized deployment** via Podman on Ubuntu
 
 ---
 
-### 🔗 API Design
-- Designed **RESTful APIs** using FastAPI  
-- Structured endpoints for clear frontend-backend communication  
-- Ensures maintainability and scalability of the system  
+## Architecture
+
+```
+Flutter Mobile App
+      │
+      │ HTTPS REST API
+      ▼
+ FastAPI Backend ──── PostgreSQL Database
+      │
+      ├── AI Processing Layer
+      └── Auth Service (JWT)
+```
+
+**Request Flow (Auth):**
+
+```
+User → App → POST /login → DB query → JWT Token → Authenticated
+```
 
 ---
 
-### 🚀 Deployment
-- Containerized application using **Podman (rootless containers)**  
-- Chosen for:
-  - Enhanced security (no root privileges required)  
-  - Lightweight and efficient resource usage  
-  - Easy integration with Ubuntu server environment  
-- Supports scalable deployment and load balancing  
+## Tech Stack
+
+| Layer | Technology | Reason |
+|-------|-----------|--------|
+| Frontend | Flutter (Dart) | Cross-platform, single codebase |
+| Backend | Python + FastAPI | Async, Swagger, AI/ML integration |
+| Database | PostgreSQL | Relational, scalable, consistent |
+| Container | Podman (rootless) | Secure, lightweight |
+| CI/CD | Jenkins | Automated build & deploy |
+| CDN | Cloudflare | Fast static asset delivery |
 
 ---
 
-### 🔄 CI/CD Pipeline
-- Implemented CI/CD using **Jenkins**  
-- Automated build and deployment pipeline  
-- Ensures backend service stays active and reduces downtime (prevents sleep state issues)  
+## Getting Started
 
----
+### Prerequisites
 
-### ⚡ Performance Optimization
-- Optimized API response time for faster backend processing  
-- Integrated CDN for faster delivery of static assets  
-- Improved overall application responsiveness and user experience  
+- Flutter SDK `>=3.0.0`
+- Python `>=3.10`
+- PostgreSQL `>=14`
+- Podman `>=4.0`
 
----
-### .env.example
-    DATABASE_URL=
-    API_KEY=
-    SECRET_KEY=
+### 1. Clone the repository
 
----
-# 📊 Impact & Issue Analysis — ABCat Shop (Flutter Web)
-
----
-
-## 🚀 Impact Analysis
-
-### Home Page — Network Performance
-
-| Metric | Value | Note |
-|--------|-------|------|
-| Total Requests | **14** | vs 1,378 on Profile page (-99%) |
-| Data Transferred | **2.9 MB** | vs 4.4 MB on Profile page (-34%) |
-| Page Finish | **~3 s** | All resources loaded |
-| Auth Response | **304 ms** | signInWithPassword |
-
-### Request Breakdown
-
-| Type | Count |
-|------|-------|
-| Auth (Firebase) | 5 req |
-| Images (PNG) | 4 req |
-| API (Backend) | 3 req |
-| Other | 2 req |
-
-### Key API Response Times
-
-| Endpoint | Time |
-|----------|------|
-| signInWithPassword | 324 ms |
-| accounts.lookup | 302 ms |
-| home-advertiment | 441 ms |
-| token refresh | 310 ms |
-| login | 56 ms |
-
-### Image Payload
-
-| File | Size | Status |
-|------|------|--------|
-| Gemini_Generated_Image 1 | 1,569 kB | ⚠️ Heavy |
-| Gemini_Generated_Image 2 | 1,153 kB | ⚠️ Heavy |
-| sizeCat.png | 102 kB | ✅ OK |
-| **Total** | **~2.8 MB** | 96% of total payload |
-
-### Status Summary
-
-| Check | Result |
-|-------|--------|
-| HTTP Status | ✅ All 200 OK (14/14) |
-| Auth Flow | ✅ Success |
-| Backend API (Render) | ✅ Reachable |
-| Console Errors | ⚠️ 1 issue found |
-
-### ✅ What's Working Well
-
-- Firebase Auth ดึง UID ได้ถูกต้อง
-- POST Favourite → Backend ตอบ 200 ทุกครั้ง
-- Request count ต่ำมาก (14 req) โครงสร้างหน้า Home clean
-- Auth flow ไม่มี 4xx/5xx เลย
-
-### ⚠️ Improvement Opportunities
-
-- **รูปภาพหนักเกินไป** — Gemini images รวม ~2.7 MB (96% ของ payload)
-  - แนะนำ: แปลงเป็น WebP + resize ก่อน upload → ลด load time ได้ ~60-70%
-- **Backend บน Render (free tier)** — อาจ cold start ช้า 30-60 วิ หากไม่มีคนใช้งานนาน
-- **Profile page** มี 1,378 requests, 147 MB resources — ควรตรวจสอบ asset/script ที่โหลดซ้ำ
-
----
-
-## 🐛 Issue Analysis
-
-### Summary
-
-| Severity | Count |
-|----------|-------|
-| 🔴 Errors | 0 |
-| 🟠 Warnings | 1 |
-| 🔵 Info | 2 |
-
----
-
-### 🟠 [Warning] Deprecated Feature — `Intl.v8BreakIterator`
-
-**Source:** `dart_sdk.js:238432`
-
-**Description:**  
-`Intl.v8BreakIterator` ถูก deprecate ใน Chrome แล้ว มาจาก Dart SDK ที่ใช้ package `intl` เวอร์ชันเก่า
-
-**Impact:** กลาง — Chrome อาจเอาออกในอนาคต ควรแก้ก่อน deploy production
-
-**Fix:**
 ```bash
-flutter upgrade
-flutter pub upgrade intl
-flutter clean
+git clone https://github.com/your-username/abcat-shop.git
+cd abcat-shop
+```
+
+### 2. Configure environment variables
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env`:
+
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/abcatdb
+API_KEY=your_api_key_here
+SECRET_KEY=your_secret_key_here
+```
+
+### 3. Run the backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+### 4. Run the Flutter app
+
+```bash
+cd mobile
 flutter pub get
-```
-
-หรือใน `pubspec.yaml`:
-```yaml
-intl: ^0.19.0  # หรือเวอร์ชัน stable ล่าสุด
+flutter run
 ```
 
 ---
 
-### 🔵 [Info x4] Form Field Missing `id` or `name` Attribute
+## API Reference
 
-**Description:**  
-มี input/field 4 จุดที่ไม่มี `id` หรือ `name` — ทำให้ accessibility tools และ form autofill ทำงานได้ไม่เต็มที่
+### Authentication
 
-**Impact:** ต่ำ — ไม่กระทบ logic แต่ควรแก้เพื่อ accessibility
+#### `POST /login`
 
-**Fix:**
-```dart
-TextField(
-  key: Key('email_field'),
-  autofillHints: [AutofillHints.email],
-  ...
-)
+```json
+{
+  "email": "user@example.com",
+  "password": "password123@"
+}
+```
+
+**Response:**
+
+```json
+{
+  "access_token": "jwt_token_here",
+  "token_type": "bearer"
+}
+```
+
+**Flow:** Validate input → Query database → Generate JWT
+
+---
+
+### Swagger UI
+
+After starting the backend, visit:
+
+```
+http://localhost:8000/docs
 ```
 
 ---
 
-### 🔵 [Info x1] Session History Item Has Been Marked Skippable
+## Deployment
 
-**Description:**  
-Browser ทำ navigation entry บางรายการเป็น skippable อัตโนมัติ มักเกิดจาก `pushReplacement` ซ้อนกันหลายชั้น
+### Using Podman (rootless)
 
-**Impact:** ต่ำ — ไม่กระทบ user โดยตรง แต่ปุ่ม Back อาจข้ามบางหน้า
-
-**Fix:**
-```dart
-// แทน pushReplacement ซ้อนกัน ให้ใช้
-Navigator.of(context).pushAndRemoveUntil(
-  MaterialPageRoute(builder: (context) => HomePage()),
-  (route) => false,
-);
+```bash
+podman build -t abcat-backend ./backend
+podman run -d -p 8000:8000 --env-file .env abcat-backend
 ```
+
+### CI/CD with Jenkins
+
+The `Jenkinsfile` at the project root automates:
+
+1. Build Docker/Podman image
+2. Run tests
+3. Deploy to Ubuntu server
+4. Health check
 
 ---
 
-## 📋 Action Items
+## Performance
 
-| Priority | Issue | Action |
-|----------|-------|--------|
-| 🟠 Medium | `Intl.v8BreakIterator` deprecated | `flutter upgrade` + `pub upgrade intl` |
-| 🟡 Medium | รูปภาพหนัก (2.7 MB) | แปลงเป็น WebP + resize ก่อน upload |
-| 🟢 Low | Form field ไม่มี id/name | เพิ่ม `key` และ `autofillHints` |
-| 🟢 Low | Session history skippable | ปรับ navigation ใช้ `pushAndRemoveUntil` |
+| Metric | Value |
+|--------|-------|
+| Home page requests | 14 req |
+| Page load time | ~3 s |
+| Auth response time | ~304 ms |
+| Data transferred | 2.9 MB |
 
+### Known Optimizations
+
+- [ ] Convert banner images to **WebP** format (saves ~60-70% payload)
+- [ ] Add keep-alive ping to prevent Render cold starts (30-60 s)
+- [ ] Profile page: investigate 1,378 requests (asset deduplication)
+- [ ] Update `intl` package to `^0.19.0` (fix `Intl.v8BreakIterator` deprecation)
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m 'feat: add your feature'`
+4. Push to the branch: `git push origin feature/your-feature`
+5. Open a Pull Request
+
+---
+
+## License
+
+This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+*Built with ❤️ using Flutter + FastAPI*
 
 ### Planning Stucture
 ![Planning Structure](https://res.cloudinary.com/dag73dhpl/image/upload/v1775318744/%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%9E%E0%B8%B1%E0%B8%92%E0%B8%99%E0%B8%B2_2_f0wk5t.png)

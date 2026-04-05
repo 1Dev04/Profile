@@ -166,7 +166,154 @@ Generate JWT Token
     SECRET_KEY=
 
 ---
-### Impact
+# 📊 Impact & Issue Analysis — ABCat Shop (Flutter Web)
+
+---
+
+## 🚀 Impact Analysis
+
+### Home Page — Network Performance
+
+| Metric | Value | Note |
+|--------|-------|------|
+| Total Requests | **14** | vs 1,378 on Profile page (-99%) |
+| Data Transferred | **2.9 MB** | vs 4.4 MB on Profile page (-34%) |
+| Page Finish | **~3 s** | All resources loaded |
+| Auth Response | **304 ms** | signInWithPassword |
+
+### Request Breakdown
+
+| Type | Count |
+|------|-------|
+| Auth (Firebase) | 5 req |
+| Images (PNG) | 4 req |
+| API (Backend) | 3 req |
+| Other | 2 req |
+
+### Key API Response Times
+
+| Endpoint | Time |
+|----------|------|
+| signInWithPassword | 324 ms |
+| accounts.lookup | 302 ms |
+| home-advertiment | 441 ms |
+| token refresh | 310 ms |
+| login | 56 ms |
+
+### Image Payload
+
+| File | Size | Status |
+|------|------|--------|
+| Gemini_Generated_Image 1 | 1,569 kB | ⚠️ Heavy |
+| Gemini_Generated_Image 2 | 1,153 kB | ⚠️ Heavy |
+| sizeCat.png | 102 kB | ✅ OK |
+| **Total** | **~2.8 MB** | 96% of total payload |
+
+### Status Summary
+
+| Check | Result |
+|-------|--------|
+| HTTP Status | ✅ All 200 OK (14/14) |
+| Auth Flow | ✅ Success |
+| Backend API (Render) | ✅ Reachable |
+| Console Errors | ⚠️ 1 issue found |
+
+### ✅ What's Working Well
+
+- Firebase Auth ดึง UID ได้ถูกต้อง
+- POST Favourite → Backend ตอบ 200 ทุกครั้ง
+- Request count ต่ำมาก (14 req) โครงสร้างหน้า Home clean
+- Auth flow ไม่มี 4xx/5xx เลย
+
+### ⚠️ Improvement Opportunities
+
+- **รูปภาพหนักเกินไป** — Gemini images รวม ~2.7 MB (96% ของ payload)
+  - แนะนำ: แปลงเป็น WebP + resize ก่อน upload → ลด load time ได้ ~60-70%
+- **Backend บน Render (free tier)** — อาจ cold start ช้า 30-60 วิ หากไม่มีคนใช้งานนาน
+- **Profile page** มี 1,378 requests, 147 MB resources — ควรตรวจสอบ asset/script ที่โหลดซ้ำ
+
+---
+
+## 🐛 Issue Analysis
+
+### Summary
+
+| Severity | Count |
+|----------|-------|
+| 🔴 Errors | 0 |
+| 🟠 Warnings | 1 |
+| 🔵 Info | 2 |
+
+---
+
+### 🟠 [Warning] Deprecated Feature — `Intl.v8BreakIterator`
+
+**Source:** `dart_sdk.js:238432`
+
+**Description:**  
+`Intl.v8BreakIterator` ถูก deprecate ใน Chrome แล้ว มาจาก Dart SDK ที่ใช้ package `intl` เวอร์ชันเก่า
+
+**Impact:** กลาง — Chrome อาจเอาออกในอนาคต ควรแก้ก่อน deploy production
+
+**Fix:**
+```bash
+flutter upgrade
+flutter pub upgrade intl
+flutter clean
+flutter pub get
+```
+
+หรือใน `pubspec.yaml`:
+```yaml
+intl: ^0.19.0  # หรือเวอร์ชัน stable ล่าสุด
+```
+
+---
+
+### 🔵 [Info x4] Form Field Missing `id` or `name` Attribute
+
+**Description:**  
+มี input/field 4 จุดที่ไม่มี `id` หรือ `name` — ทำให้ accessibility tools และ form autofill ทำงานได้ไม่เต็มที่
+
+**Impact:** ต่ำ — ไม่กระทบ logic แต่ควรแก้เพื่อ accessibility
+
+**Fix:**
+```dart
+TextField(
+  key: Key('email_field'),
+  autofillHints: [AutofillHints.email],
+  ...
+)
+```
+
+---
+
+### 🔵 [Info x1] Session History Item Has Been Marked Skippable
+
+**Description:**  
+Browser ทำ navigation entry บางรายการเป็น skippable อัตโนมัติ มักเกิดจาก `pushReplacement` ซ้อนกันหลายชั้น
+
+**Impact:** ต่ำ — ไม่กระทบ user โดยตรง แต่ปุ่ม Back อาจข้ามบางหน้า
+
+**Fix:**
+```dart
+// แทน pushReplacement ซ้อนกัน ให้ใช้
+Navigator.of(context).pushAndRemoveUntil(
+  MaterialPageRoute(builder: (context) => HomePage()),
+  (route) => false,
+);
+```
+
+---
+
+## 📋 Action Items
+
+| Priority | Issue | Action |
+|----------|-------|--------|
+| 🟠 Medium | `Intl.v8BreakIterator` deprecated | `flutter upgrade` + `pub upgrade intl` |
+| 🟡 Medium | รูปภาพหนัก (2.7 MB) | แปลงเป็น WebP + resize ก่อน upload |
+| 🟢 Low | Form field ไม่มี id/name | เพิ่ม `key` และ `autofillHints` |
+| 🟢 Low | Session history skippable | ปรับ navigation ใช้ `pushAndRemoveUntil` |
 
 
 ### Planning Stucture
